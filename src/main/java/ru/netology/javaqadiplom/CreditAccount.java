@@ -41,8 +41,8 @@ public class CreditAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = balance - amount;
-        if (balance > -creditLimit) {
+        balance = balance - amount;//убрать в 46
+        if (balance > -creditLimit) {// убрать минус
             balance = -amount;
             return true;
         } else {
@@ -66,7 +66,7 @@ public class CreditAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = amount;
+        balance = amount;// добавить былнс и дабить+
         return true;
     }
 

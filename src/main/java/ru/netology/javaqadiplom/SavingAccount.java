@@ -45,7 +45,7 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = balance - amount;
+        balance = balance - amount; //меняем 48 на 49
         if (balance > minBalance) {
             return true;
         } else {
@@ -72,7 +72,7 @@ public class SavingAccount extends Account {
         if (balance + amount < maxBalance) {
             balance = amount;
             return true;
-        } else {
+        } else { // быланс = быланс + эмаунт
             return false;
         }
     }
