@@ -200,7 +200,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldYearChange() { // Проверка расчета суммы процентов при положэительном балансе
+    public void shouldYearChange() { // Проверка расчета суммы процентов при положительном балансе
         SavingAccount account = new SavingAccount(
                 350,
                 1_000,
