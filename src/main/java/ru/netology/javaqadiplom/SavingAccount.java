@@ -20,17 +20,30 @@ public class SavingAccount extends Account {
      * @param rate - неотрицательное число, ставка в процентах годовых на остаток
      */
     public SavingAccount(int initialBalance, int minBalance, int maxBalance, int rate) {
-        if (rate < 0) {
-            throw new IllegalArgumentException(
-              "Накопительная ставка не может быть отрицательной, а у вас: " + rate
-            );
-        }
-        this.balance = initialBalance;
-        this.minBalance = minBalance;
-        this.maxBalance = maxBalance;
-        this.rate = rate;
-    }
+            if (rate < 0) {
+                throw new IllegalArgumentException(
+                        "Накопительная ставка не может быть отрицательной, а у вас: " + rate
+                );
+            } else {
+                this.rate = rate;
+            }
 
+            if (-initialBalance > minBalance) {
+                throw new IllegalArgumentException(
+
+                );
+            } else {
+                this.balance = initialBalance;
+            }
+
+            if (minBalance < 0) {
+                throw new IllegalArgumentException(
+                );
+            } else {
+
+                this.minBalance = minBalance;
+            }
+        }
     /**
      * Операция оплаты с карты на указанную сумму.
      * В результате успешного вызова этого метода, баланс должен уменьшиться
@@ -45,8 +58,9 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = balance - amount; //меняем 48 на 49
-        if (balance > minBalance) {
+
+        if (balance - amount >= minBalance) {
+            balance = balance - amount;
             return true;
         } else {
             return false;
@@ -69,10 +83,10 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        if (balance + amount < maxBalance) {
-            balance = amount;
+        if (balance + amount >= maxBalance) {
+            balance = balance + amount;
             return true;
-        } else { // быланс = быланс + эмаунт
+        } else {
             return false;
         }
     }
@@ -86,7 +100,12 @@ public class SavingAccount extends Account {
      */
     @Override
     public int yearChange() {
-        return balance / 100 * rate;
+        if (balance <= 0) {
+            return 0;
+        } else {
+            double sumPercent = (double) balance / 100 * rate;
+            return (int) sumPercent;
+        }
     }
 
     public int getMinBalance() {
