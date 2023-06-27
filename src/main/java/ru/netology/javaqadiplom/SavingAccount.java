@@ -29,7 +29,7 @@ public class SavingAccount extends Account {
             this.rate = rate;
         }
 
-        if  (initialBalance < minBalance) {
+        if (initialBalance < minBalance) {
             throw new IllegalArgumentException(
                     "Начальный баланс должен быть положительным, а у вас: " + initialBalance
             );

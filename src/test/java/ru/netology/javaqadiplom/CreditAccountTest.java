@@ -43,6 +43,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.getBalance());
     }
+
     @Test
     public void purchaseUpToTheCreditLimit() {
         CreditAccount account = new CreditAccount(
@@ -114,6 +115,7 @@ public class CreditAccountTest {
                     15);
         });
     }
+
     @Test
     public void ShouldNotDoIfRateIsNegative() { // проверка выкидывания исключения при отрицальном ставке
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -143,6 +145,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(5_000, account.getCreditLimit());
     }
+
     @Test
     public void ShpuldNotPayAmountIsNegative() {
         CreditAccount account = new CreditAccount(
@@ -155,6 +158,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.getBalance());
     }
+
     @Test
     public void ShpuldNotAddAmountIsNegative() {
         CreditAccount account = new CreditAccount(
