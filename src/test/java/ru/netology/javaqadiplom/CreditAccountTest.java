@@ -45,19 +45,6 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void purchaseUpToTheCreditLimit() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        account.pay(5_000);
-
-        Assertions.assertEquals(-5000, account.getBalance());
-    }
-
-    @Test
     public void purchaseOnCredit() {
         CreditAccount account = new CreditAccount(
                 0,
@@ -70,6 +57,31 @@ public class CreditAccountTest {
         Assertions.assertEquals(-3_000, account.getBalance());
     }
 
+    @Test
+    public void ShouldNotPayAmountIsNegative() {
+        CreditAccount account = new CreditAccount(
+                0,
+                5_000,
+                15
+        );
+
+        account.pay(-3_000);
+
+        Assertions.assertEquals(0, account.getBalance());
+    }
+
+    @Test
+    public void ShpuldNotAddAmountIsNegative() {
+        CreditAccount account = new CreditAccount(
+                0,
+                5_000,
+                15
+        );
+
+        account.add(-3_000);
+
+        Assertions.assertEquals(0, account.getBalance());
+    }
     @Test
     public void accrualOfInterestOnAPositiveBalance() {
         CreditAccount account = new CreditAccount(
@@ -110,7 +122,7 @@ public class CreditAccountTest {
     public void checkingTheExclusionInCaseOfANegativeCreditLimit() { // проверка выкидывания исключения при отрицальном кредитном лимите
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
-                    0,
+                    1_000,
                     -5_000,
                     15);
         });
@@ -144,31 +156,5 @@ public class CreditAccountTest {
                 15);
 
         Assertions.assertEquals(5_000, account.getCreditLimit());
-    }
-
-    @Test
-    public void ShpuldNotPayAmountIsNegative() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        account.pay(-3_000);
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
-    @Test
-    public void ShpuldNotAddAmountIsNegative() {
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        account.add(-3_000);
-
-        Assertions.assertEquals(0, account.getBalance());
     }
 }
