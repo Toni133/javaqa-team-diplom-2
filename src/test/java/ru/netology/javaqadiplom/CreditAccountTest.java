@@ -45,29 +45,28 @@ public class CreditAccountTest {
     }
 
     @Test
+
     public void purchaseUpToTheCreditLimit() {
         CreditAccount account = new CreditAccount(
                 0,
                 5_000,
                 15
         );
-
         account.pay(5_000);
-
         Assertions.assertEquals(-5000, account.getBalance());
     }
 
     @Test
-    public void purchaseOnCredit() {
+    public void ShpuldNotAddAmountIsNegative() {
         CreditAccount account = new CreditAccount(
                 0,
                 5_000,
                 15
         );
 
-        account.pay(3_000);
+        account.add(-3_000);
 
-        Assertions.assertEquals(-3_000, account.getBalance());
+        Assertions.assertEquals(0, account.getBalance());
     }
 
     @Test
@@ -171,4 +170,3 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.getBalance());
     }
-}
