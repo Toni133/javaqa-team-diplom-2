@@ -82,6 +82,7 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.getBalance());
     }
+
     @Test
     public void accrualOfInterestOnAPositiveBalance() {
         CreditAccount account = new CreditAccount(

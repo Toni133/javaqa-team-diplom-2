@@ -32,7 +32,7 @@ public class CreditAccount extends Account {
                 throw new IllegalArgumentException(
                         "Превышен кредитный лимит"
                 );
-        } else {
+            } else {
                 this.balance = initialBalance;
             }
         }
@@ -46,7 +46,6 @@ public class CreditAccount extends Account {
             this.creditLimit = creditLimit;
         }
     }
-
 
     /**
      * Операция оплаты с карты на указанную сумму.
