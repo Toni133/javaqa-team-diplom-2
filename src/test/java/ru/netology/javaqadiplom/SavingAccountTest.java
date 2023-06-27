@@ -76,30 +76,26 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldNotPayMimBalanceIsNegative() { // Проверка оплаты с карты при отрицательном минимальном балансе
-        SavingAccount account = new SavingAccount(
-                2_000,
-                -1_000,
-                10_000,
-                5
-        );
-
+    public void shouldNotPayMimBalanceIsNegative() { // Проверка выкидывания исключения при отрицательном минимальном балансе
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            account.pay(400);
+            SavingAccount account = new SavingAccount(
+                    2_000,
+                    -1_000,
+                    10_000,
+                    5
+            );
         });
     }
 
     @Test
-    public void shouldNotPayMimBalanceMoreThenMaxBalance() { //Проверка оплаты с карты - минимельный баланс больше максимального
-        SavingAccount account = new SavingAccount(
-                4_500,
-                5_000,
-                4_000,
-                5
-        );
-
+    public void shouldNotPayMimBalanceMoreThenMaxBalance() { //Проверка выкидывания исключения, если минимельный баланс больше максимального
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            account.pay(400);
+            SavingAccount account = new SavingAccount(
+                    4_500,
+                    5_000,
+                    4_000,
+                    5
+            );
         });
     }
 
@@ -107,7 +103,7 @@ public class SavingAccountTest {
     public void shouldNotPayBalanceIsZero() { //Проверка оплаты с карты - итоговый балагнс равен 0
         SavingAccount account = new SavingAccount(
                 4_500,
-                5_000,
+                0,
                 4_000,
                 5
         );
@@ -172,38 +168,35 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldNotAddMimBalanceIsNegative() { // Проверка пополнения карты при отрицательном минимальном балансе
-        SavingAccount account = new SavingAccount(
-                2_000,
-                -1_000,
-                10_000,
-                5
-        );
+    public void shouldNotDoMimBalanceIsNegative() { // Проверка исключения на отрицательнынй минимальный баланс
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            account.add(400);
+            SavingAccount account = new SavingAccount(
+                    2_000,
+                    -1_000,
+                    10_000,
+                    5
+            );
         });
     }
 
     @Test
     public void shouldNotAddMimBalanceMoreThenMaxBalance() { // Проверка пополнения карты - минимальный баланс больше максимального
-        SavingAccount account = new SavingAccount(
-                4_500,
-                5_000,
-                4_000,
-                5
-        );
-
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            account.add(400);
+            SavingAccount account = new SavingAccount(
+                    4_500,
+                    5_000,
+                    4_000,
+                    5
+            );
         });
     }
 
     @Test
-    public void shouldYearChange() { // Проверка расчета суммы процентов при положэительном балансе
+    public void shouldYearChange() { // Проверка расчета суммы процентов при положительном балансе
         SavingAccount account = new SavingAccount(
                 350,
-                1_000,
+                100,
                 10_000,
                 15
         );
@@ -215,7 +208,7 @@ public class SavingAccountTest {
     public void shouldYearChangeBalanceIsZero() { // Проверка расчета суммы процентов при нулевом балансе
         SavingAccount account = new SavingAccount(
                 0,
-                1_000,
+                0,
                 10_000,
                 15
         );
@@ -223,14 +216,48 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldYearChangeBalanceIsNegative() { // Проверка расчета суммы процентов при отрицательном балансе
+    public void shouldNotDoIfRateIsNegative() { //Проверка выкидывания исключения, если ставка отрицательная
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    4_500,
+                    3_000,
+                    10_000,
+                    -5
+            );
+        });
+    }
+
+    @Test
+    public void shouldNotDoIfMinBalanceMoreThenMaxBalance() { //Проверка выкидывания исключения, если минимальнрый баланс больше максимального
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    6_000,
+                    5_000,
+                    3_000,
+                    5
+            );
+        });
+    }
+
+    @Test
+    public void shouldGetMaxBalance() { // Проверка получения максимального баланса
         SavingAccount account = new SavingAccount(
-                -200,
+                2_000,
                 1_000,
                 10_000,
                 15
         );
+        Assertions.assertEquals(10_000, account.getMaxBalance());
+    }
 
-        Assertions.assertEquals(0, account.yearChange());
+    @Test
+    public void shouldGetMinBalance() { // Проверка получения минимального баланса
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                15
+        );
+        Assertions.assertEquals(1_000, account.getMinBalance());
     }
 }
