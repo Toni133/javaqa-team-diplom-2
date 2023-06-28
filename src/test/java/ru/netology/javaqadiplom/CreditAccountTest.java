@@ -82,6 +82,10 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.getBalance());
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 587176c5fd924aed5782d2c2bb70f073ea8b91ee
     @Test
     public void accrualOfInterestOnAPositiveBalance() {
         CreditAccount account = new CreditAccount(
