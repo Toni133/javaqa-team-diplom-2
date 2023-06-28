@@ -228,7 +228,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void shouldNotDoIfMinBalanceMoreThenMaxBalance() { //Проверка выкидывания исключения, если минимальнрый баланс больше максимального
+    public void shouldNotDoIfMinBalanceMoreThenMaxBalanc() { //Проверка выкидывания исключения, если минимальнрый баланс больше максимального
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
                     6_000,
